@@ -1,41 +1,41 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Nav from '../views/Nav.vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import HomeView from '../views/HomeView.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/nav',
-    name: 'Navigation',
-    component: Nav,
-  },
-  {
-    path: '*',
-    name: '404',
-    component: () => import('../views/NotFound.vue'),
-  },
-  {
     path: '/',
-    name: 'Index',
-    component: () => import('../views/Index.vue'),
+    name: 'home',
+    component: HomeView
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  },
+  {
+    path: '/nav',
+    name: 'nav',
+    component: () => import('../views/Nav.vue')
   },
   {
     path: '/container',
-    name: 'Container',
-    component: () => import('../views/Container.vue'),
+    name: 'container',
+    component: () => import('../views/Container.vue')
   },
   {
     path: '/components',
-    name: 'Components',
-    component: () => import('../views/Components.vue'),
-  },
-];
+    name: 'components',
+    component: () => import('../views/Components.vue')
+  }
+]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes,
-});
+  routes
+})
 
-export default router;
+export default router
