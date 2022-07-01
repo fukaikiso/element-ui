@@ -1,4 +1,4 @@
-# element-pro
+# vue-pro
 
 ## Project setup
 ```
