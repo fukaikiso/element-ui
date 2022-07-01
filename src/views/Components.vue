@@ -12,58 +12,24 @@
       </el-header>
       <el-container>
         <el-aside width="200px">
-          <el-menu class="aside-menu" default-active="1" background-color="#444" text-color="#bbb" active-text-color="#fff">
-            <el-menu-item index="1">
+          <el-menu class="aside-menu" :default-active="$route.path" background-color="#444" text-color="#bbb" active-text-color="#fff" router>
+            <el-menu-item index="/components/container">
               <i class="el-icon-menu"></i>
               Container容器
             </el-menu-item>
-            <el-menu-item index="2">
+            <el-menu-item index="/components/form">
               <i class="el-icon-menu"></i>
               Form表单
             </el-menu-item>
-            <el-menu-item index="3">
-              <i class="el-icon-menu"></i>
-              table表格
-            </el-menu-item>
-            <el-menu-item index="1">
-              <i class="el-icon-menu"></i>
-              Container容器
-            </el-menu-item>
-            <el-menu-item index="2">
-              <i class="el-icon-menu"></i>
-              Form表单
-            </el-menu-item>
-            <el-menu-item index="3">
-              <i class="el-icon-menu"></i>
-              table表格
-            </el-menu-item>
-            <el-menu-item index="1">
-              <i class="el-icon-menu"></i>
-              Container容器
-            </el-menu-item>
-            <el-menu-item index="2">
-              <i class="el-icon-menu"></i>
-              Form表单
-            </el-menu-item>
-            <el-menu-item index="3">
-              <i class="el-icon-menu"></i>
-              table表格
-            </el-menu-item>
-            <el-menu-item index="1">
-              <i class="el-icon-menu"></i>
-              Container容器
-            </el-menu-item>
-            <el-menu-item index="2">
-              <i class="el-icon-menu"></i>
-              Form表单
-            </el-menu-item>
-            <el-menu-item index="3">
+            <el-menu-item index="/components/table">
               <i class="el-icon-menu"></i>
               table表格
             </el-menu-item>
           </el-menu>
         </el-aside>
-        <el-main>内容</el-main>
+        <el-main class="main">
+          <router-view />
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -73,7 +39,7 @@
   height: calc(100vh - 60px);
 }
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
   height: 100%;
 }
 ::-webkit-scrollbar-button {
@@ -81,5 +47,10 @@
 }
 ::-webkit-scrollbar-thumb {
   background-color: #dedee0;
+  border-radius: 4px;
+}
+
+.main {
+  height: calc(100vh - 60px);
 }
 </style>
