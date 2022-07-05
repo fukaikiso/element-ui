@@ -7,8 +7,24 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
+    redirect: '/home/index',
+  },
+  {
+    path: '/home',
     name: 'home',
     component: HomeView,
+    children: [
+      {
+        path: 'index',
+        name: 'Index',
+        component: () => import('../views/Index.vue'),
+      },
+      {
+        path: 'me',
+        name: 'Me',
+        component: () => import('../views/Me.vue'),
+      },
+    ],
   },
   {
     path: '/about',

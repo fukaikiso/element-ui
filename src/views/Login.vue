@@ -12,12 +12,17 @@
       <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
     </div>
 
-    <mt-button type="primary" size="large" @click="toLogin">立即登录</mt-button>
+    <mt-button type="primary" size="large" @click="login">立即登录</mt-button>
   </div>
 </template>
 
 <script>
+import { Toast } from 'mint-ui';
+import { mapState } from 'vuex';
 export default {
+  computed: {
+    ...mapState(['user']),
+  },
   data() {
     return {
       username: '',
@@ -28,13 +33,23 @@ export default {
     toRegister() {
       this.$router.push('/register');
     },
-    toLogin() {
-      if (this.username == 'aaa' && this.password == 'aaa111') {
-        console.log('登录成功');
-        this.$router.push('/');
-      } else {
-        console.log('登录失败');
-      }
+
+    login() {
+      const url = 'login';
+      const params = `username=${this.username}&password=${this.password}`;
+      this.axios.post(url, params).then(res => {
+        // console.log(res);
+        if (res.data.code == 200) {
+          this.$store.commit('updateUser', res.data.result);
+          // console.log(this.user);
+          this.$router.push('/');
+        } else if (res.data.code == 201) {
+          Toast({
+            message: '登录失败，请检查用户名密码是否正确',
+            duration: 2000,
+          });
+        }
+      });
     },
   },
 };

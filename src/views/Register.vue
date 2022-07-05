@@ -11,10 +11,10 @@
       <mt-field label="用户名" placeholder="请输入用户名" v-model="username" @input="checkName" :state="usernameSate"></mt-field>
       <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password" @input="checkPassword" :state="passwordSate"></mt-field>
       <mt-field label="确认密码" placeholder="请确认密码" type="password" v-model="password2" @input="checkPassword2" :state="password2Sate"></mt-field>
-      <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="phone" @input="checkPhone" :state="phoneSate"></mt-field>
+      <!-- <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="phone" @input="checkPhone" :state="phoneSate"></mt-field> -->
     </div>
 
-    <mt-button type="primary" size="large" @click="checkLogin">立即注册</mt-button>
+    <mt-button type="primary" size="large" @click="register">立即注册</mt-button>
   </div>
 </template>
 
@@ -97,20 +97,49 @@ export default {
         return false;
       }
     },
-    checkLogin() {
-      if (this.checkName() && this.checkPassword() && this.checkPassword2() && this.checkPhone()) {
+    checkRegister() {
+      // if (this.checkName() && this.checkPassword() && this.checkPassword2() && this.checkPhone()) {
+      if (this.checkName() && this.checkPassword() && this.checkPassword2()) {
         // console.log('验证成功');
-        Toast({
-          message: '注册成功',
-          duration: 2000,
-        });
-        setTimeout(() => {
-          this.$router.push('/login');
-        }, 1000);
         return true;
       } else {
         // console.log('验证失败');
         return false;
+      }
+    },
+    //BUG: 表单验证失败时，toast全部出现
+    register() {
+      if (this.checkRegister()) {
+        const url = 'register';
+        const params = `username=${this.username}&password=${this.password}`;
+        this.axios.post(url, params).then(res => {
+          if (res.data.code == 200) {
+            Toast({
+              message: '注册成功',
+              duration: 2000,
+            });
+            setTimeout(() => {
+              this.$router.push('/login');
+            }, 1000);
+            return true;
+          } else if (res.data.code == 201) {
+            Toast({
+              message: '用户名存在，注册失败',
+              duration: 2000,
+            });
+            return false;
+          } else {
+            Toast({
+              message: '请求失败',
+              duration: 2000,
+            });
+          }
+        });
+      } else {
+        Toast({
+          message: '表单验证失败',
+          duration: 2000,
+        });
       }
     },
   },
