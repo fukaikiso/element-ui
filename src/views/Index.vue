@@ -41,11 +41,7 @@ export default {
       category: null,
     };
   },
-  // watch: {
-  //   selected(newValue, oldValue) {
-  //     this.$router.push(`/home/${newValue}`);
-  //   }
-  // },
+
   computed: {
     ...mapState(['database', 'user']),
   },

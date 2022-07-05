@@ -1,8 +1,7 @@
 <template>
   <div>
     <mt-header title="我的">
-      <!-- BUG: 返回时底部标签对应出错 -->
-      <router-link to="/home/index" slot="left">
+      <router-link to="/" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
       <div v-if="!user" slot="right" class="header">
@@ -34,7 +33,7 @@ export default {
   methods: {
     quit() {
       this.$store.commit('updateUser', null);
-      this.$router.push('/home/index');
+      this.$router.push('/');
     },
   },
 };
