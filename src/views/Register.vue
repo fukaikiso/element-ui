@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { Toast } from 'mint-ui';
+// import { Toast } from 'mint-ui';
 export default {
   data() {
     return {
@@ -46,10 +46,12 @@ export default {
       } else {
         // console.log('error');
         this.usernameSate = 'error';
-        Toast({
-          message: '用户名为3~15位数字或字母组合',
-          duration: 2000,
-        });
+        this.showMsg('用户名为3~15位数字或字母组合');
+        // this.$toast('用户名为3~15位数字或字母组合');
+        // Toast({
+        //   message: '用户名为3~15位数字或字母组合',
+        //   duration: 500,
+        // });
         return false;
       }
     },
@@ -62,10 +64,11 @@ export default {
       } else {
         // console.log('error');
         this.passwordSate = 'error';
-        Toast({
-          message: '密码为6~15位数字或字母组合',
-          duration: 2000,
-        });
+        this.showMsg('密码为6~15位数字或字母组合');
+        // Toast({
+        //   message: '密码为6~15位数字或字母组合',
+        //   duration: 2000,
+        // });
         return false;
       }
     },
@@ -76,10 +79,11 @@ export default {
         return true;
       } else {
         this.password2Sate = 'error';
-        Toast({
-          message: '密码不匹配',
-          duration: 2000,
-        });
+        this.showMsg('密码不匹配');
+        // Toast({
+        //   message: '密码不匹配',
+        //   duration: 2000,
+        // });
         return false;
       }
     },
@@ -90,10 +94,11 @@ export default {
         return true;
       } else {
         this.phoneSate = 'error';
-        Toast({
-          message: '手机号码格式不正确',
-          duration: 2000,
-        });
+        this.showMsg('手机号码格式不正确');
+        // Toast({
+        //   message: '手机号码格式不正确',
+        //   duration: 2000,
+        // });
         return false;
       }
     },
@@ -107,39 +112,42 @@ export default {
         return false;
       }
     },
-    //BUG: 表单验证失败时，toast全部出现
     register() {
       if (this.checkRegister()) {
         const url = 'register';
         const params = `username=${this.username}&password=${this.password}`;
-        this.axios.post(url, params).then(res => {
+        this.axios.post(url, params).then((res) => {
           if (res.data.code == 200) {
-            Toast({
-              message: '注册成功',
-              duration: 2000,
-            });
+            this.showMsg('注册成功');
+            // Toast({
+            //   message: '注册成功',
+            //   duration: 2000,
+            // });
             setTimeout(() => {
               this.$router.push('/login');
             }, 1000);
             return true;
           } else if (res.data.code == 201) {
-            Toast({
-              message: '用户名存在，注册失败',
-              duration: 2000,
-            });
+            this.showMsg('用户名存在，注册失败');
+            // Toast({
+            //   message: '用户名存在，注册失败',
+            //   duration: 2000,
+            // });
             return false;
           } else {
-            Toast({
-              message: '请求失败',
-              duration: 2000,
-            });
+            this.showMsg('请求失败');
+            // Toast({
+            //   message: '请求失败',
+            //   duration: 2000,
+            // });
           }
         });
       } else {
-        Toast({
-          message: '表单验证失败',
-          duration: 2000,
-        });
+        this.showMsg('表单验证失败');
+        // Toast({
+        //   message: '表单验证失败',
+        //   duration: 2000,
+        // });
       }
     },
   },

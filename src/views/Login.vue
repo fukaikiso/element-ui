@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { Toast } from 'mint-ui';
+// import { Toast } from 'mint-ui';
 import { mapState } from 'vuex';
 export default {
   computed: {
@@ -37,17 +37,21 @@ export default {
     login() {
       const url = 'login';
       const params = `username=${this.username}&password=${this.password}`;
-      this.axios.post(url, params).then(res => {
+      this.axios.post(url, params).then((res) => {
         // console.log(res);
         if (res.data.code == 200) {
           this.$store.commit('updateUser', res.data.result);
           // console.log(this.user);
           this.$router.push('/');
         } else if (res.data.code == 201) {
-          Toast({
+          this.$toast({
             message: '登录失败，请检查用户名密码是否正确',
             duration: 2000,
           });
+          // Toast({
+          //   message: '登录失败，请检查用户名密码是否正确',
+          //   duration: 2000,
+          // });
         }
       });
     },
