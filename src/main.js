@@ -11,7 +11,7 @@ import VueAxios from 'vue-axios';
 //定义全局方法
 Vue.prototype.showMsg = (msg) => {
   //清除前置的toast
-  window.document.querySelectorAll('.is-placemiddle').forEach((e) => e.parentNode.removeChild(e));
+  document.querySelectorAll('.is-placemiddle').forEach((e) => e.parentNode.removeChild(e));
   Toast({
     message: msg,
     duration: 2000,
