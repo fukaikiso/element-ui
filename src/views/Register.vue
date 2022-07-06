@@ -42,16 +42,12 @@ export default {
       if (exp.test(this.username)) {
         // console.log('success');
         this.usernameSate = 'success';
+        this.clearToast();
         return true;
       } else {
         // console.log('error');
         this.usernameSate = 'error';
         this.showMsg('用户名为3~15位数字或字母组合');
-        // this.$toast('用户名为3~15位数字或字母组合');
-        // Toast({
-        //   message: '用户名为3~15位数字或字母组合',
-        //   duration: 500,
-        // });
         return false;
       }
     },
@@ -60,15 +56,12 @@ export default {
       if (exp.test(this.password)) {
         // console.log('success');
         this.passwordSate = 'success';
+        this.clearToast();
         return true;
       } else {
         // console.log('error');
         this.passwordSate = 'error';
         this.showMsg('密码为6~15位数字或字母组合');
-        // Toast({
-        //   message: '密码为6~15位数字或字母组合',
-        //   duration: 2000,
-        // });
         return false;
       }
     },
@@ -76,14 +69,11 @@ export default {
       const exp = /^\w{6,15}$/;
       if (this.password2 == this.password && exp.test(this.password2)) {
         this.password2Sate = 'success';
+        this.clearToast();
         return true;
       } else {
         this.password2Sate = 'error';
         this.showMsg('密码不匹配');
-        // Toast({
-        //   message: '密码不匹配',
-        //   duration: 2000,
-        // });
         return false;
       }
     },
@@ -91,14 +81,11 @@ export default {
       const exp = /^1[3-9]\d{9}$/;
       if (exp.test(this.phone)) {
         this.phoneSate = 'success';
+        this.clearToast();
         return true;
       } else {
         this.phoneSate = 'error';
         this.showMsg('手机号码格式不正确');
-        // Toast({
-        //   message: '手机号码格式不正确',
-        //   duration: 2000,
-        // });
         return false;
       }
     },
@@ -119,36 +106,34 @@ export default {
         this.axios.post(url, params).then((res) => {
           if (res.data.code == 200) {
             this.showMsg('注册成功');
-            // Toast({
-            //   message: '注册成功',
-            //   duration: 2000,
-            // });
             setTimeout(() => {
               this.$router.push('/login');
             }, 1000);
             return true;
           } else if (res.data.code == 201) {
             this.showMsg('用户名存在，注册失败');
-            // Toast({
-            //   message: '用户名存在，注册失败',
-            //   duration: 2000,
-            // });
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
             return false;
           } else {
             this.showMsg('请求失败');
-            // Toast({
-            //   message: '请求失败',
-            //   duration: 2000,
-            // });
           }
         });
       } else {
         this.showMsg('表单验证失败');
-        // Toast({
-        //   message: '表单验证失败',
-        //   duration: 2000,
-        // });
       }
+    },
+    showMsg(msg) {
+      //清除前置的toast
+      this.clearToast();
+      this.$toast({
+        message: msg,
+        duration: 2000,
+      });
+    },
+    clearToast() {
+      document.querySelectorAll('.is-placemiddle').forEach((e) => e.parentNode.removeChild(e));
     },
   },
 };

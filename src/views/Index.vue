@@ -61,10 +61,15 @@ export default {
       });
     },
     loadArticles(cid, page, callback) {
+      this.$indicator.open({
+        text: 'Loading...',
+        spinnerType: 'fading-circle',
+      });
       const url = `/articles?cid=${cid}&page=${page}`;
       this.axios.get(url).then((res) => {
         let articles = res.data.results; //接收查询结果数组
         callback(articles); //调用callback方法，执行后续业务
+        this.$indicator.close();
       });
     },
     loadMore() {

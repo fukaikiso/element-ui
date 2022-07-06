@@ -17,7 +17,6 @@
 </template>
 
 <script>
-// import { Toast } from 'mint-ui';
 import { mapState } from 'vuex';
 export default {
   computed: {
@@ -48,10 +47,6 @@ export default {
             message: '登录失败，请检查用户名密码是否正确',
             duration: 2000,
           });
-          // Toast({
-          //   message: '登录失败，请检查用户名密码是否正确',
-          //   duration: 2000,
-          // });
         }
       });
     },
