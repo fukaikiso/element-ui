@@ -9,9 +9,9 @@ import VueAxios from 'vue-axios';
 import moment from 'moment';
 
 Vue.prototype.moment = moment;
-// import Vconsole from 'vconsole';
+import Vconsole from 'vconsole';
 
-// const vConsole = new Vconsole();
+const vConsole = new Vconsole();
 
 // //定义全局方法
 // Vue.prototype.showMsg = (msg) => {
@@ -25,7 +25,7 @@ Vue.prototype.moment = moment;
 
 //NOTE：设置本地服务器ip
 // 设置数据库ip及端口，也可在state中设置共享数据
-axios.defaults.baseURL = 'http://127.0.0.1:3000/';
+axios.defaults.baseURL = 'http://192.168.1.24:3000/';
 
 Vue.use(VueAxios, axios);
 
