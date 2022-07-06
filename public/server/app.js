@@ -25,7 +25,7 @@ const pool = mysql.createPool({
 const server = express();
 
 //NOTE:设置本地计算机ip作为host
-server.set('host', 'http://192.168.1.24');
+server.set('host', 'http://127.0.0.1');
 
 server.use(
   bodyParser.urlencoded({
@@ -36,11 +36,11 @@ server.use(
 // 加载CORS模块
 const cors = require('cors');
 
-//NOTE:将本地ip加入origin，解决跨域问题
+//NOTE:解决跨域问题
 // 使用CORS中间件
 server.use(
   cors({
-    origin: ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://192.168.1.24:8080', 'http://127.0.0.1:3000'],
+    origin: ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://127.0.0.1:3000', 'http://xixi.vaiwan.com'],
   })
 );
 
