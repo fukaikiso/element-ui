@@ -6,6 +6,9 @@ import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import moment from 'moment';
+
+Vue.prototype.moment = moment;
 // import Vconsole from 'vconsole';
 
 // const vConsole = new Vconsole();

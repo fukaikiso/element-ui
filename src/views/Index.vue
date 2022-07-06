@@ -26,7 +26,7 @@
 
     <!-- NOTE:无限滚动 -->
     <div v-infinite-scroll="loadMore" infinite-scroll-distance="60" infinite-scroll-immediate-check="true">
-      <article-item :article="item" v-for="item in articleList" :key="item.id"> </article-item>
+      <article-item :article="a" v-for="a in articleList" :key="a.id" @click.native="$router.push(`/article?id=${a.id}`)"> </article-item>
       <div style="margin-bottom: 60px"></div>
     </div>
   </div>
