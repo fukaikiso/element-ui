@@ -1,19 +1,21 @@
 <template>
-  <div v-if="articles">
+  <div>
     <!-- 单一文章信息开始 -->
-    <div class="articleItem" v-for="a in articles" :key="a.id">
+    <div class="articleItem">
       <!-- 文章标题开始 -->
-      <div class="articleItem-header">{{ a.subject }}</div>
+      <div class="articleItem-header">{{ article.subject }}</div>
       <!-- 文章标题结束 -->
       <!-- 文章图文信息开始 -->
       <div class="articleItem-wrapper">
         <!-- 文章图像开始  -->
         <div class="articleImg">
-          <img :src="`/resource/articles/${a.image}`" />
+          <img v-if="article.image" :src="`/resource/articles/${article.image}`" />
         </div>
         <!-- 文章图像结束 -->
         <!-- 文章简介开始 -->
-        <div class="articleDes">{{ a.description }}</div>
+        <div class="articleDes">
+          {{ article.description }}
+        </div>
         <!-- 文章简介结束 -->
       </div>
       <!-- 文章图文信息结束 -->
@@ -23,33 +25,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 export default {
-  props: ['category_id'],
+  // 声明自定义属性article，
+  // 用于接收传过来的文章对象{id,subject,description,image}
+  props: ['article'],
   data() {
     return {
       navactive: '1',
-      articles: null,
     };
-  },
-  computed: {
-    ...mapState(['database']),
-  },
-  methods: {
-    getArticles() {
-      // const url = this.database + 'detail';
-      const url = 'articles?cid=' + this.category_id;
-      this.axios.get(url).then(res => {
-        // console.log(res);
-        this.articles = res.data.results;
-      });
-    },
-  },
-  mounted() {
-    this.getArticles();
-  },
-  updated() {
-    this.getArticles();
   },
 };
 </script>
