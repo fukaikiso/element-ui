@@ -129,6 +129,16 @@ export default {
       });
     },
   },
+  activated() {
+    // console.log('激活');
+    //禁用无线滚动
+    this.isLoading = false;
+  },
+  deactivated() {
+    // console.log('页面保活');
+    //启用无线滚动
+    this.isLoading = true;
+  },
 };
 </script>
 

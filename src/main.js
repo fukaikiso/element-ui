@@ -9,9 +9,9 @@ import VueAxios from 'vue-axios';
 import moment from 'moment';
 
 Vue.prototype.moment = moment;
-import Vconsole from 'vconsole';
+// import Vconsole from 'vconsole';
 
-const vConsole = new Vconsole();
+// const vConsole = new Vconsole();
 
 // //定义全局方法
 // Vue.prototype.showMsg = (msg) => {

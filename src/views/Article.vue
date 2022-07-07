@@ -2,10 +2,8 @@
   <div class="article" v-if="detail">
     <!-- 顶部导航开始 -->
     <header>
-      <mt-header title="学前端，上学问">
-        <router-link slot="left" to="/">
-          <mt-button icon="back"></mt-button>
-        </router-link>
+      <mt-header title="学前端，上学问" fixed>
+        <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
       </mt-header>
     </header>
     <!-- 导航导航结束 -->
@@ -66,6 +64,7 @@ export default {
   height: 100vh;
 }
 .question-header {
+  margin-top: 40px;
   margin-bottom: 5px;
   padding: 10px;
   background: #fff;

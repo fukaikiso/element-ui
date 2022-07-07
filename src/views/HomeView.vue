@@ -26,9 +26,7 @@ import router from '@/router';
 export default {
   data() {
     return {
-      //HACK:为什么直接使用data监听$route.path，当路由跳转回'/'时,tabSelected不更新？
-      // tabSelected: this.$route.path.split('/').pop(),
-      tabSelected: 'index',
+      tabSelected: this.$route.path.split('/').pop(),
     };
   },
   name: 'HomeView',
@@ -36,16 +34,16 @@ export default {
     HelloWorld,
   },
 
+  activated() {
+    this.tabSelected = this.$route.path.split('/').pop();
+  },
+
   watch: {
-    tabSelected(newValue, oldValue) {
-      // console.log('newValue :>> ', newValue);
-      let path = `/home/${newValue}`;
-      if (this.$route.path == path) return;
-      this.$router.push(path);
-    },
-    $route(to, from) {
-      // console.log('to :>> ', to.path);
-      this.tabSelected = to.path.split('/').pop();
+    tabSelected(newval, oldval) {
+      console.log(`tabSelected从 ${oldval} 变成了 ${newval} `);
+      //防止路由重复跳转
+      if (newval == this.$route.path.split('/').pop()) return;
+      this.$router.push(`/home/${newval}`);
     },
   },
 };

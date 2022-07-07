@@ -1,9 +1,9 @@
 <template>
   <div>
     <mt-header title="我的">
-      <router-link to="/" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
+      //BUG:返回底部标签出错
+      <mt-button icon="back" slot="left" @click="$router.go(-1)">返回</mt-button>
+
       <div v-if="!user" slot="right" class="header">
         <router-link to="/login">登录</router-link> |
         <router-link to="/register">注册</router-link>
