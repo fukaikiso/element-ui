@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    controls 控制面板
+    autoplay
+    muted
+    loop
+    preload
+    poster 初始化显示的图片
+    width 播放器宽度
+    height 播放器高度
+   -->
+  <video id="video" controls width="640" height="360" style="background-color: #000;" poster="../resource/logo.jpg"
+    src="../resource/let_it_go.mp4"></video>
+
+  <button id="btn">点我获取播放器属性</button>
+
+  <script>
+    // const btn = document.querySelector('#btn');
+    // const video = document.querySelector('#video');
+    //id可以直接用
+    //单位为秒
+    btn.addEventListener('click', function () {
+      console.log('视频总时长:', video.duration);
+      console.log('视频当前位置:', video.currentTime);
+    })
+  </script>
+</body>
+
+</html>
