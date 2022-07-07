@@ -10,6 +10,11 @@ const routes = [
     redirect: '/home/index',
   },
   {
+    path: '*',
+    name: '404',
+    component: () => import('../views/404.vue'),
+  },
+  {
     path: '/home',
     name: 'home',
     component: HomeView,
