@@ -105,10 +105,13 @@ export default {
         const params = `username=${this.username}&password=${this.password}`;
         this.axios.post(url, params).then((res) => {
           if (res.data.code == 200) {
-            this.showMsg('注册成功');
-            setTimeout(() => {
+            this.$messagebox.confirm('注册成功', '提示').then(() => {
               this.$router.push('/login');
-            }, 1000);
+            });
+            // this.showMsg('注册成功');
+            // setTimeout(() => {
+            //   this.$router.push('/login');
+            // }, 1000);
             return true;
           } else if (res.data.code == 201) {
             this.showMsg('用户名存在，注册失败');

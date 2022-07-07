@@ -39,9 +39,11 @@ export default {
       this.axios.post(url, params).then((res) => {
         // console.log(res);
         if (res.data.code == 200) {
-          this.$store.commit('updateUser', res.data.result);
+          this.$messagebox.confirm('登录成功', '提示').then(() => {
+            this.$store.commit('updateUser', res.data.result);
+            this.$router.push('/');
+          });
           // console.log(this.user);
-          this.$router.push('/');
         } else if (res.data.code == 201) {
           this.$toast({
             message: '登录失败，请检查用户名密码是否正确',

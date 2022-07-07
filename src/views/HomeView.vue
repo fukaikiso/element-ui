@@ -40,7 +40,7 @@ export default {
 
   watch: {
     tabSelected(newval, oldval) {
-      console.log(`tabSelected从 ${oldval} 变成了 ${newval} `);
+      // console.log(`tabSelected从 ${oldval} 变成了 ${newval} `);
       //防止路由重复跳转
       if (newval == this.$route.path.split('/').pop()) return;
       this.$router.push(`/home/${newval}`);
