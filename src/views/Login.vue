@@ -39,7 +39,7 @@ export default {
       this.axios.post(url, params).then((res) => {
         // console.log(res);
         if (res.data.code == 200) {
-          this.$messagebox.confirm('登录成功', '提示').then(() => {
+          this.$messagebox('提示', '登录成功').then(() => {
             this.$store.commit('updateUser', res.data.result);
             this.$router.push('/');
           });
