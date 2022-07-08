@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      width: 400px;
+      border: 1px solid #ddd;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    .container p {
+      font-size: 1.3em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .container img {
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      animation: rotate 30s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .container input {
+      width: 340px;
+      display: block;
+      margin: 10px auto;
+    }
+
+    .container .time {
+      width: 340px;
+      height: 30px;
+      margin: 0px auto;
+    }
+
+    .container .time .left {
+      float: left;
+    }
+
+    .container .time .right {
+      float: right;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .container .lrc {
+      text-align: center;
+      font-size: 12px;
+      margin: 3px;
+      font-weight: normal;
+      height: 20px;
+      line-height: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <p>let it go</p>
+    <img id="img" src="assets/logo.jpg" alt="">
+    <p class="lrc" id="lrcp">&nbsp;</p>
+    <input id="range" type="range" min="0" value="0" max="195">
+    <div class="time">
+      <span class="left">00:00</span>
+      <span class="right">00:00</span>
+    </div>
+
+    <button id="btn_play">播放/暂停</button>
+    <button id="btn_vp">音量+</button>
+    <button id="btn_vm">音量-</button>
+    <button id="btn_05">0.5倍速</button>
+    <button id="btn_1">1倍速</button>
+    <button id="btn_2">2倍速</button>
+  </div>
+
+  <script src="assets/moment.js"></script>
+  <script>
+    // 创建Audio对象  加载数据源
+    let audio = new Audio();
+    audio.src = 'assets/let_it_go.mp3';
+
+    // 为 #btn_play 绑定事件
+    let btnPlay = document.getElementById('btn_play');
+    btnPlay.addEventListener('click', () => {
+      let img = document.getElementById('img');
+      if (audio.paused) {
+        audio.play();
+        img.style.animationPlayState = "running";
+      } else {
+        audio.pause();
+        img.style.animationPlayState = "paused";
+      }
+    });
+
+    // 音量-
+    let btnvm = document.getElementById('btn_vm');
+    btnvm.addEventListener('click', () => {
+      let v = audio.volume;
+      audio.volume = Math.max(v - 0.1, 0);
+      console.log(audio.volume);
+    });
+
+    // 音量+
+    let btnvp = document.getElementById('btn_vp');
+    btnvp.addEventListener('click', () => {
+      let v = audio.volume;
+      audio.volume = Math.min(v + 0.1, 1);
+      console.log(audio.volume);
+    });
+
+    // 倍速播放
+    let btn05 = document.getElementById('btn_05');
+    let btn1 = document.getElementById('btn_1');
+    let btn2 = document.getElementById('btn_2');
+    btn05.addEventListener('click', () => {
+      audio.playbackRate = 0.5;
+    });
+    btn1.addEventListener('click', () => {
+      audio.playbackRate = 1;
+    });
+    btn2.addEventListener('click', () => {
+      audio.playbackRate = 2;
+    });
+
+
+    // 拖拽进度条，从目标位置继续播放
+    let range = document.getElementById('range');
+    range.addEventListener('change', () => {
+      audio.currentTime = range.value;
+    });
+
+
+    // 处理歌词
+    let lrc = `[00:00.51]Let It Go - Idina Menzel
+              [00:14.08]The snow glows white on the mountain tonight
+              [00:17.19]Not a footprint to be seen
+              [00:20.86]A kingdom of isolation,
+              [00:22.87]
+              [00:24.30]and it looks like I m the Queen
+              [00:28.55]The wind is howling like this swirling storm inside
+              [00:35.58]Couldn t keep it in; Heaven knows I ve tried
+              [00:42.59]Don t let them in, don t let them see
+              [00:45.91]Be the good girl you always have to be
+              [00:49.40]Conceal, don t feel, don t let them know
+              [00:55.76]Well now they know
+              [00:59.14]Let it go, let it go
+              [01:02.61]Can t hold it back anymore
+              [01:06.17]Let it go, let it go
+              [01:09.39]Turn away and slam the door
+              [01:13.18]I don t care what they re going to say
+              [01:19.82]Let the storm rage on
+              [01:24.21]The cold never bothered me anyway
+              [01:28.38]
+              [01:31.69]It s funny how some distance
+              [01:34.31]Makes everything seem small
+              [01:37.75]And the fears that once controlled me
+              [01:41.18]Can t get to me at all
+              [01:45.66]It s time to see what I can do
+              [01:49.20]To test the limits and break through
+              [01:52.80]No right, no wrong, no rules for me,
+              [01:56.94]I m free!
+              [02:00.40]Let it go, let it go
+              [02:03.87]I am one with the wind and sky
+              [02:07.21]Let it go, let it go
+              [02:10.75]You ll never see me cry
+              [02:14.49]Here I stand
+              [02:18.22]And here I ll stay
+              [02:21.62]Let the storm rage on
+              [02:33.36]My power flurries through the air into the ground
+              [02:39.79]My soul is spiraling in frozen fractals all around
+              [02:46.80]And one thought crystallizes like an icy blast
+              [02:53.73]I m never going back, the past is in the past
+              [03:01.78]Let it go, let it go
+              [03:05.31]And I ll rise like the break of dawn
+              [03:08.60]Let it go, let it go
+              [03:12.19]That perfect girl is gone
+              [03:16.25]Here I stand
+              [03:18.87]In the light of day
+              [03:24.85]Let the storm rage on
+              [03:30.09]The cold never bothered me anyway![03:35.09]`;
+
+    let lines = (() => {
+      let lines = lrc.split('\n');
+      let lrcLines = [];
+      lines.forEach((item, i) => {
+        let line = item.trim();
+        let time = line.substr(1, 5);
+        let content = line.substr(10);
+        lrcLines.push({ time: time, content: content });
+      });
+      return lrcLines;
+    })();
+
+    function showLrc() {
+      let showLine = "";
+      let lrcp = document.getElementById('lrcp');
+      lines.forEach((item, i) => {
+        let lineTime = item.time;
+        let currTime = moment(audio.currentTime * 1000).format('mm:ss');
+        if (lineTime == currTime) {
+          showLine = item.content;
+          lrcp.innerHTML = showLine;
+        }
+      });
+    }
+
+    // 监听timeupdate事件  每秒执行4次
+    audio.addEventListener('timeupdate', () => {
+      // 更新进度条
+      let range = document.getElementById('range');
+      range.max = audio.duration;
+      range.value = audio.currentTime;
+      // 更新时间文本
+      // 通过moment.js计算时间字符串 （通过script引入moment.js）
+      // script src="assets/moment.js"
+      let dm = moment(audio.duration * 1000);
+      let cm = moment(audio.currentTime * 1000);
+      let left = document.getElementsByClassName('left')[0];
+      let right = document.getElementsByClassName('right')[0];
+      left.innerHTML = cm.format('mm:ss');
+      right.innerHTML = dm.format('mm:ss');
+
+      // 显示歌词
+      showLrc();
+    });
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player_video.html</title>
+  <style>
+    .container {
+      width: 400px;
+      border: 1px solid #ddd;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    .container p {
+      font-size: 1.3em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .container img {
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+    }
+
+    .container input {
+      width: 340px;
+      display: block;
+      margin: 10px auto;
+    }
+
+    .container .time {
+      width: 340px;
+      height: 30px;
+      margin: 0px auto;
+    }
+
+    .container .time .left {
+      float: left;
+    }
+
+    .container .time .right {
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+  <video id="video" width="640" height="360" style="background: #000;" src="./assets/let_it_go.mp4"></video>
+
+  <div class="container">
+    <input id="range" type="range" min="0" value="0" max="100">
+    <div class="time">
+      <span id="left" class="left">00:00</span>
+      <span id="right" class="right">00:00</span>
+    </div>
+
+    <button id="btn_play">播放/暂停</button>
+    <button id="btn_vp">音量+</button>
+    <button id="btn_vm">音量-</button>
+    <button id="btn_05">0.5倍速</button>
+    <button id="btn_1">1倍速</button>
+    <button id="btn_2">2倍速</button>
+  </div>
+  <script src="./assets/moment.js"></script>
+  <script>
+    let player = document.getElementById('video');
+
+    //当音频基本信息加载完毕后 修改right span显示的 视频总时长
+    player.addEventListener("loadedmetadata", function () {
+      let dt = player.duration;     // 总时长
+      let dts = moment.unix(dt).format('mm:ss');
+      right.innerHTML = dts;
+    });
+
+    // 监听timeout，控制播放进度
+    player.addEventListener("timeupdate", function () {
+      let dt = player.duration;     // 总时长
+      let ct = player.currentTime;  // 当前时长
+      console.log(`总时长：${dt}  当前时间：${ct}`);
+      // 更新进度条
+      range.max = dt;
+      range.value = ct;
+      // 更新进度文本
+      let dts = moment.unix(dt).format('mm:ss');
+      let cts = moment.unix(ct).format('mm:ss');
+      left.innerHTML = cts;
+      right.innerHTML = dts;
+    });
+
+    // 拖拽进度条  监听进度条的value的改变
+    range.addEventListener("change", function () {
+      console.log(range.value);
+      player.currentTime = range.value;
+    });
+
+
+    // 控制音频的音量
+    btn_vm.onclick = function () {  // 音量减
+      // player.volume -= 0.1
+      player.volume = Math.max(0, player.volume - 0.1);
+    };
+    btn_vp.onclick = function () {  // 音量加
+      // player.volume += 0.1
+      player.volume = Math.min(1, player.volume + 0.1);
+    };
+
+    // 控制倍速播放
+    btn_05.onclick = function () {
+      player.playbackRate = 0.5;
+    };
+    btn_1.onclick = function () {
+      player.playbackRate = 1;
+    };
+    btn_2.onclick = function () {
+      player.playbackRate = 2;
+    };
+
+
+    btn_play.onclick = function () {
+      if (player.paused) {
+        player.play();
+      } else {
+        player.pause();
+      }
+    }
+  </script>
+
+
+</body>
+
+</html>
