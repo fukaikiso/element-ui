@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">点我获取当前设备经纬度</button>
+  <script>
+    btn.onclick = function () {
+      let geoloc = window.navigator.geolocation;
+      geoloc.getCurrentPosition((res) => {
+        console.log(res);
+      }, (err) => {
+        console.log('error');
+      }, { timeout: 5000 });
+    }
+  </script>
+</body>
+
+</html>
