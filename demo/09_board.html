@@ -19,7 +19,7 @@
 
   cvs.addEventListener('touchstart', function (event) {
     // console.log('touch', event);
-    event.preventDefault();
+    // event.preventDefault();
     let x = event.touches[0].pageX;
     let y = event.touches[0].pageY;
     console.log(`开始触摸：x:${x},y:${y}`);
@@ -28,7 +28,10 @@
   });
 
   cvs.addEventListener('touchmove', (event) => {
+    //避免画布被滑动
     event.preventDefault();
+    event.stopPropagation();
+
     let x = event.touches[0].pageX;
     let y = event.touches[0].pageY;
     console.log(`触摸移动：x:${x},y:${y}`);
