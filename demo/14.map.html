@@ -73,13 +73,35 @@
         map.addControl(new AMap.Scale());
 
         // 在图面添加鹰眼控件，在地图右下角显示地图的缩略图
-        map.addControl(new AMap.HawkEye({ isOpen: true }));
+        map.addControl(new AMap.HawkEye({ isOpen: true, position: 'LB', width: '100px', height: '100px' }));
 
         // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
         map.addControl(new AMap.MapType());
 
         // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
-        map.addControl(new AMap.Geolocation());
+        map.addControl(new AMap.Geolocation({ offset: [18, 90] }));
+      });
+
+      //根据ip获取城市
+      AMap.plugin('AMap.CitySearch', function () {
+        var citySearch = new AMap.CitySearch();
+        citySearch.getLocalCity(function (status, result) {
+          if (status === 'complete' && result.info === 'OK') {
+            // 查询成功，result即为当前所在城市信息
+            console.log('ip地理位置', result);
+          }
+        });
+      });
+
+      //poi搜索提示
+      AMap.plugin(['AMap.AutoComplete', 'AMap.PlaceSearch'], function () {
+        var placeSearch = new AMap.PlaceSearch({
+          city: '广州',
+          // map: map
+        });
+        placeSearch.search('电影院', function (status, result) {
+          console.log('电影院', result);
+        });
       });
 
       console.log(`当前位置：(${lat},${lng})`);
@@ -89,7 +111,17 @@
       timeout: 5000
     });
 
+    //天气预报
+    //加载天气查询插件
+    AMap.plugin('AMap.Weather', function () {
+      //创建天气查询实例
+      var weather = new AMap.Weather();
 
+      //执行实时天气信息查询
+      weather.getLive('广州市', function (err, data) {
+        console.log('天气', data);
+      });
+    });
   </script>
 </body>
 
