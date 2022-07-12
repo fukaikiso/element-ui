@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<style>
+
+</style>
+
+<body>
+  <div style="width: 400px;height: 400px;border: 1px solid black;" id="container"></div>
+
+  <script type="text/javascript">
+    window._AMapSecurityConfig = {
+      securityJsCode: '67b5f7034d4a1042a30b59ae584639a5',
+    }
+  </script>
+  <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=b6ee1a064aa4052af64812484d971864"></script>
+
+  <script>
+    let geoloc = window.navigator.geolocation;
+    geoloc.getCurrentPosition((res) => {
+      //得到经纬度
+      let lat = res.coords.latitude;
+      let lng = res.coords.longitude;
+      var map = new AMap.Map('container', {
+        zoom: 11,//级别
+        center: [lng, lat],//中心点坐标
+        viewMode: '3D'//使用3D视图
+      });
+      //实时路况图层
+      var trafficLayer = new AMap.TileLayer.Traffic({
+        zIndex: 10
+      });
+      map.add(trafficLayer);//添加图层到地图
+
+      //添加标记
+      var marker = new AMap.Marker({
+        position: [lng, lat]//位置
+      });
+      map.add(marker);//添加到地图
+
+      //添加事件
+      marker.on('click', function (e) {
+        var infoWindow = new AMap.InfoWindow({ //创建信息窗体
+          isCustom: true,  //使用自定义窗体
+          content: '<div>上海市人民政府</div>', //信息窗体的内容可以是任意html片段
+          offset: new AMap.Pixel(16, -45)
+        });
+
+        infoWindow.open(map, e.target.getPosition());//打开信息窗体
+        //e.target就是被点击的Marker
+        console.log('上海市人民政府');
+      });
+
+      // 同时引入工具条插件，比例尺插件和鹰眼插件
+      AMap.plugin([
+        'AMap.ToolBar',
+        'AMap.Scale',
+        'AMap.HawkEye',
+        'AMap.MapType',
+        'AMap.Geolocation',
+      ], function () {
+        // 在图面添加工具条控件，工具条控件集成了缩放、平移、定位等功能按钮在内的组合控件
+        map.addControl(new AMap.ToolBar());
+
+        // 在图面添加比例尺控件，展示地图在当前层级和纬度下的比例尺
+        map.addControl(new AMap.Scale());
+
+        // 在图面添加鹰眼控件，在地图右下角显示地图的缩略图
+        map.addControl(new AMap.HawkEye({ isOpen: true }));
+
+        // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
+        map.addControl(new AMap.MapType());
+
+        // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
+        map.addControl(new AMap.Geolocation());
+      });
+
+      console.log(`当前位置：(${lat},${lng})`);
+    }, (err) => {
+      console.log('error');
+    }, {
+      timeout: 5000
+    });
+
+
+  </script>
+</body>
+
+</html>
