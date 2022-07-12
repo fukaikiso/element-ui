@@ -62,7 +62,7 @@ export default {
     onSubmit() {
       const { name, pwd, phone } = this.form;
       console.log(`表单数据:`, name, pwd, phone);
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           alert('提交成功');
         } else {
