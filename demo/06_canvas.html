@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<style>
+  #cvs {
+    background-color: #aaa;
+    border: 1px solid black;
+  }
+</style>
+
+<body>
+  <!-- 此处的宽高为canvas图像的分辨率 -->
+  <canvas id="cvs" width="640" height="360"></canvas>
+
+  <script>
+    // canvas默认canvas没有代码提示需要安装插件，或者引入以下代码：
+    //注意该代码必须放在document.getElementById('cvs');上一行
+    /** @type {HTMLCanvasElement} */
+    let cvs = document.getElementById('cvs');
+    let ctx = cvs.getContext('2d');
+    // 绘制填充
+    ctx.fillStyle = 'red';
+    ctx.fillRect(100, 50, 150, 100);
+    //绘制描边
+    ctx.strokeStyle = 'blue';
+    ctx.strokeRect(70, 20, 210, 160);
+    //绘制字体
+    ctx.font = '30px 微软雅黑';
+    ctx.fillStyle = 'green';
+    ctx.fillText('ddd', 300, 100);
+
+  </script>
+
+</body>
+
+
+</html>

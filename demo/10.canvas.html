@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="cvs" width="600" height="350" style="border:1px solid black; background:aliceblue"></canvas>
+
+  <script>
+    /** @type {HTMLCanvasElement} */
+    let cvs = document.getElementById('cvs');
+    let ctx = cvs.getContext('2d');
+
+    //矩形
+    ctx.rect(50, 50, 200, 150);
+    ctx.fillStyle = '#9116a1';
+    ctx.fill();
+    ctx.stroke();
+
+    //弧度，圆心坐标，半径，弧度
+    ctx.beginPath();
+    ctx.arc(400, 150, 100, 0, Math.PI / 2);
+    ctx.lineTo(400, 150);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(395, 145, 105, Math.PI / 2, 2 * Math.PI);
+    ctx.lineTo(395, 145);
+    ctx.closePath();
+    ctx.fillStyle = '#aaa';
+    ctx.fill();
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script>
+    //后端数据
+    let data = [1, 2, 3, 4, 5, 6, 7];
+
+    //选中目标标签
+    let container = document.getElementById('container');
+    //初始化添加的内容
+    let add = '';
+    //遍历数据，将数据存入要添加的内容
+    data.forEach(d => {
+      add += `<div>${d}</div>`;
+    });
+    //将要添加的内容渲染到页面
+    container.innerHTML = add
+  </script>
+</body>
+
+</html>
