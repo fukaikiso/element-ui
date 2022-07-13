@@ -18,6 +18,14 @@
         <el-button @click="resetForm('form')">重置</el-button>
       </el-form-item>
     </el-form>
+
+    <!-- 测试上传文件 -->
+    <el-upload class="upload-demo" drag action="http://localhost:3000/upload" multiple name="uploadFile" :on-success="handleSuccess">
+      <i class="el-icon-upload"></i>
+      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+      <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+    <img v-for="item in urls" :key="item" style="" :src="item" class="imgPreview" />
   </div>
 </template>
 
@@ -32,6 +40,7 @@ export default {
       }
     };
     return {
+      urls: [],
       form: {
         name: '',
         pwd: '',
@@ -73,6 +82,14 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
+
+    handleSuccess(response, file, filelist) {
+      console.log('response :>> ', response);
+      console.log('file :>> ', file);
+      console.log('filelist :>> ', filelist);
+      let url = response.urls[0];
+      this.urls.push(url);
+    },
   },
 };
 </script>
@@ -82,4 +99,8 @@ export default {
   text-align: justify;
   text-align-last: justify;
 } */
+
+.imgPreview {
+  height: 150px;
+}
 </style>
