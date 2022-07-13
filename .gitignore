@@ -1,2 +1,3 @@
 uploadserver/node_modules/
-webSocket/socketSever/node_modules/
+webSocket/socketServer/node_modules/
+webSocket/chatserver/node_modules/

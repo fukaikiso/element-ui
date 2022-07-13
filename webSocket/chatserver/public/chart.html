@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信聊天室</title>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/chart.css">
+</head>
+
+<body>
+    <div id="chart-container">
+        <div class="chart-user-list" id="chart-user-list">
+            <div class="user-item">
+                <img src="images/avatar/15.jpg" alt="">
+                未知名
+            </div>
+        </div>
+        <div class="chart-main-area">
+            <div class="chart-main-title">
+                <h1>微信聊天室(<span id="userNumber"></span>人)-<span id="currentUser"></span></h1>
+            </div>
+            <div class="chart-list" id="chart-list">
+                <!-- <div class="user-logined" id="user-logined"><span id="logined-user"></span>上线了</div> -->
+                <!-- <div class="chart-item">
+                    <div class="user-face"><img src="images/avatar/11.jpg" alt=""></div>
+                    <div class="user-message">111</div>
+                </div> -->
+            </div>
+            <div class="chart-form">
+                <div><textarea class="chart-form-message" id="message" placeholder="请输入3~40个字符"></textarea></div>
+                <div><input type="button" id="send" class="chart-form-send" value="发表"></div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/socket.io.js"></script>
+    <script>
+        const socket = io.connect('http://localhost:3000');
+
+        send.onclick = function () {
+            let msg = message.value;
+            // console.log(msg);
+            if (msg.length < 3 || msg.length > 40) {
+                return;
+            }
+            socket.emit('textmsg', { name: 'xixi', avatar: '66.jpg', msg });
+            // socket.emit('textmsg', msg);
+            message.value = '';
+        };
+
+        socket.on('textmsg', function (data) {
+            console.log('服务器：' + data);
+            const chartList = document.getElementById('chart-list');
+            chartList.innerHTML += `
+            <div class="chart-item">
+                    <div class="user-face">
+                        <img src="images/avatar/${data.avatar}" alt="">
+                    </div>
+                    <div style="font-size:0.8rem;color:#aaa;">${data.name}</div>
+                    <div class="user-message">${data.msg}</div>
+            </div>`;
+            chartList.scrollTop = chartList.scrollHeight;
+        });
+
+        socket.on('countmsg', function (data) {
+            userNumber.innerHTML = data;
+        })
+    </script>
+</body>
+
+</html>
