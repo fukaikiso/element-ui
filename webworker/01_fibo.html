@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button id="btn">点我计算fb(45)</button>
+  <button id="btn2">点我异步计算fb(45)</button>
+
+  <script>
+    //创建worker对象，加载woker代码
+    let worker = new Worker('./worker.js');
+
+
+    function fb(n) {
+      return n < 3 ? 1 : fb(n - 1) + fb(n - 2);
+    }
+
+    btn.onclick = function () {
+      //卡主线程
+      console.log(fb(45));
+    };
+
+    btn2.onclick = function () {
+      //启动webworker异步执行计算任务
+      worker.postMessage(45);
+
+    }
+  </script>
+</body>
+
+</html>
