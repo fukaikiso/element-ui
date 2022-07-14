@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>微信聊天室</title>
+  <link rel="stylesheet" href="styles/normalize.css">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/chart.css">
+</head>
+
+<body>
+  <div id="chart-container">
+    <div class="chart-user-list" id="chart-user-list">
+      <div class="user-item" id="userinfo">
+        <img src="images/avatar/15.jpg" alt="">
+        未知名
+      </div>
+    </div>
+    <div class="chart-main-area">
+      <div class="chart-main-title">
+        <h1>微信聊天室(<span id="userNumber"></span>人)-<span id="currentUser"></span></h1>
+      </div>
+      <div class="chart-list" id="chart-list">
+        <!-- <div class="user-logined" id="user-logined"><span id="logined-user"></span>上线了</div> -->
+
+      </div>
+      <div class="chart-form">
+        <div><textarea class="chart-form-message" id="message"></textarea></div>
+        <div><input type="button" id="send" class="chart-form-send" value="发表"></div>
+      </div>
+    </div>
+  </div>
+  <script src="scripts/socket.io.js"></script>
+  <script>
+    let name = '温柔的亮';
+    let avatar = '107.jpg';
+    // 修改页面左上角个人信息
+    userinfo.innerHTML = `
+                <img src="images/avatar/${avatar}" alt=""> 
+                ${name}`;
+
+
+
+    let socket = io.connect('http://121.4.247.63:3333');
+    console.log(socket);
+    // 当socket对象链接成功后，监听countmsg消息 接收在线人数 
+    socket.on('countmsg', function (data) {
+      userNumber.innerHTML = data;
+    });
+
+    // 当socket对象链接成功后，监听textmsg消息
+    socket.on('textmsg', function (data) {
+      console.log(data);
+      // 修改聊天记录的显示效果
+      let chatlist = document.getElementById('chart-list');
+      let html = chatlist.innerHTML +
+        `<div class="chart-item">
+                    <div class="user-face">
+                        <img src="images/avatar/${data.avatar}" alt="">        
+                    </div>
+                    <div style="font-size:0.8em;">${data.name}</div>
+                    <div class="user-message">${data.text}</div>
+                </div>`;
+      chatlist.innerHTML = html;
+      // 是chatlist的滚动条持续保留在底部
+      chatlist.scrollTop = chatlist.scrollHeight;
+    });
+    // 发消息
+    send.onclick = function () {
+      let text = message.value; // textarea输入的内容             
+      if (text.length < 3 || text.length > 40) {
+        return;  // 字数太少或太多，不发消息
+      }
+      socket.emit('textmsg', {
+        name, avatar, text
+      });
+      message.value = "";  // 清空输入框  
+    }
+  </script>
+</body>
+
+</html>

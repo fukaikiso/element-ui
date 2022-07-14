@@ -37,6 +37,13 @@
     </div>
     <script src="scripts/socket.io.js"></script>
     <script>
+        let name = 'xiix';
+        let avatar = '66.jpg';
+        // 修改页面左上角个人信息
+        userinfo.innerHTML = `
+                <img src="images/avatar/${avatar}" alt=""> 
+                ${name}`;
+
         const socket = io.connect('http://localhost:3000');
 
         send.onclick = function () {
@@ -45,7 +52,8 @@
             if (msg.length < 3 || msg.length > 40) {
                 return;
             }
-            socket.emit('textmsg', { name: 'xixi', avatar: '66.jpg', msg });
+
+            socket.emit('textmsg', { name, avatar, msg });
             // socket.emit('textmsg', msg);
             message.value = '';
         };
