@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  #container {
+    position: fixed;
+    width: 100%;
+    height: 500px;
+  }
+
+  #d1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 61%;
+    height: 49%;
+  }
+
+  #d2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 38%;
+    height: 100%;
+  }
+
+  #d3 {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 61%;
+    height: 49%;
+  }
+</style>
+
+<body>
+  <div id="container">
+    <div id="d1"></div>
+    <div id="d2"></div>
+    <div id="d3"></div>
+  </div>
+
+  <script src="./housedata/axios.min.js"></script>
+  <script src="./echarts.js"></script>
+  <script>
+    axios.get('./housedata/price.json').then(res => {
+      // console.log(res);
+
+      //需要将res中的数据结构，整理成echarts所需要的数据结构
+      let legendData = [];
+      let seriesData = [];
+      for (i in res.data) {
+        legendData.push(i);
+        seriesData.push({
+          name: i,
+          type: 'line',
+          data: res.data[i]
+        });
+      }
+
+      // console.log(legendData);
+      // console.log(seriesData);
+
+
+      let chart = echarts.init(document.getElementById('d1'));
+      let option = {
+        title: {
+          text: '北京主城区二手房价趋势图'
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: legendData
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        },
+        yAxis: {
+          type: 'value',
+          min: 60000
+        },
+        series: seriesData
+      };
+
+      chart.setOption(option);
+    });
+
+    axios.get('./housedata/housetype.json').then(res => {
+
+      // console.log(res);
+
+      let yData = [];
+      let seriesData = [];
+      for (i in res.data) {
+        if (res.data[i] > 20) {
+          yData.unshift(i);
+          seriesData.unshift(res.data[i]);
+        }
+      }
+
+      let chart = echarts.init(document.getElementById('d2'));
+      option = {
+        title: {
+          text: '北京二手房交易户型数量分布'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'value',
+          boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+          type: 'category',
+          data: yData,
+          axisLabel: {
+            // rotate: 45,
+            inerval: 0
+          }
+        },
+        series: [
+          {
+            name: i,
+            type: 'bar',
+            data: seriesData
+          }
+        ]
+      };
+      chart.setOption(option);
+    });
+
+    axios.get('./housedata/attention.json').then(res => {
+
+      console.log(res);
+
+      let legendData = [];
+      let seriesData = [];
+      for (i of res.data) {
+        legendData.push(i.community);
+        seriesData.push({
+          name: i.community,
+          value: i.attention
+        });
+      }
+
+      // console.log(legendData);
+      // console.log(seriesData);
+
+      let chart = echarts.init(document.getElementById('d3'));
+      option = {
+        title: {
+          text: '北京二手房关注度',
+          left: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b} </br> 关注度: {c} ({d}%)'
+        },
+        legend: {
+          type: 'scroll',
+          orient: 'vertical',
+          right: 10,
+          top: 20,
+          bottom: 20,
+          data: legendData
+        },
+        series: [
+          {
+            name: '小区',
+            type: 'pie',
+            radius: '55%',
+            center: ['40%', '50%'],
+            data: seriesData,
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      };
+
+      chart.setOption(option);
+    })
+  </script>
+</body>
+
+</html>

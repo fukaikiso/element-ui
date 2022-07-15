@@ -27,7 +27,10 @@
     // 指定图表的配置项和数据
     var option = {
       title: {
-        text: 'ECharts 入门示例'
+        text: 'ECharts 入门示例',
+        textStyle: {
+          color: 'blue'
+        }
       },
       tooltip: {},
       legend: {
@@ -41,7 +44,10 @@
         {
           name: '销量',
           type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
+          data: [5, 20, 36, 10, 10, 20],
+          itemStyle: {
+            color: 'red',
+          }
         }
       ]
     };
