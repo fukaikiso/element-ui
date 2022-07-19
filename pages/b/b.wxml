@@ -1,0 +1,9 @@
+<!--pages/b/b.wxml-->
+<text>pages/b/b.wxml</text>
+<navigator url="/pages/c/c">我是B，点我跳转到C</navigator>
+
+<!-- Redirect -->
+<navigator open-type="redirect"
+  url="/pages/c/c">
+  我是B，点我redirect到C
+</navigator>

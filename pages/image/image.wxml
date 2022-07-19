@@ -1,0 +1,15 @@
+<!--pages/image/image.wxml-->
+<!-- <text>pages/image/image.wxml</text> -->
+<image src="/images/index_enable.png"></image>
+
+<image src="/images/1.jpg" mode="aspectFit"
+  style="background:#ccc;"></image>
+
+<image src="/images/2.jpg" mode="top">
+</image>
+
+<image 
+  src="/images/3.jpg" 
+  mode="aspectFill"
+  show-menu-by-longpress="{{true}}">
+</image>

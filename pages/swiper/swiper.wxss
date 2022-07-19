@@ -1,0 +1,14 @@
+/* pages/swiper/swiper.wxss */
+swiper-item {
+  position: relative;
+}
+swiper-item text {
+  position: absolute; left: 20rpx; bottom: 20rpx;
+  color: white; font-weight: bold;
+  font-size: 1.1em;
+}
+
+swiper, swiper image {
+  width: 750rpx;
+  height: 421rpx;
+}

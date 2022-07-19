@@ -1,0 +1,16 @@
+<!--pages/scrollview/scrollview.wxml-->
+<text>pages/scrollview/scrollview.wxml</text>
+
+<scroll-view 
+  enable-flex="{{true}}"
+  scroll-x="{{true}}"
+  show-scrollbar="{{false}}"
+  enhanced="{{true}}">
+  <view class="item" wx:for="{{50}}">
+    <image 
+      style="width: 180rpx;"
+      mode="widthFix"
+      src="https://p1.meituan.net/moviemachine/de254185defaaf9ead46c7caee9b7f32143838.jpg"></image>
+    <text>亮亮</text>
+  </view>
+</scroll-view>

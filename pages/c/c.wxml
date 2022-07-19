@@ -1,0 +1,32 @@
+<!--pages/c/c.wxml-->
+<text>pages/c/c.wxml</text>
+<navigator url="/pages/a/a">我是C，点我跳转到A</navigator>
+
+<!-- navigateBack -->
+<navigator open-type="navigateBack">
+  我是C，点我回到上一页
+</navigator>
+<navigator open-type="navigateBack" delta="2">
+  我是C，点我回到上上一页
+</navigator>
+
+<!-- switchTab -->
+<navigator open-type="switchTab" 
+  url="/pages/index/index">
+  我是C，点我跳转到index
+</navigator> 
+
+<!-- reLaunch -->
+<navigator open-type="reLaunch"
+  url="/pages/index/index">
+  我是C，点我relaunch到index
+</navigator>
+<navigator open-type="reLaunch"
+  url="/pages/b/b">
+  我是C，点我relaunch到B
+</navigator> 
+
+
+
+
+

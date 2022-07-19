@@ -1,0 +1,3 @@
+<!--pages/a/a.wxml-->
+<text>pages/a/a.wxml</text> 
+<navigator url="/pages/b/b">我是A，点我跳转到B</navigator>

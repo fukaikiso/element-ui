@@ -1,4 +1,4 @@
-// pages/theater/theater.js
+// pages/image/image.js
 Page({
 
   /**

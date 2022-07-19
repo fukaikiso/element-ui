@@ -1,0 +1,12 @@
+/* pages/scrollview/scrollview.wxss */
+scroll-view {
+  width: 750rpx; height: 300rpx;
+  display: flex;
+}
+
+.item {
+  margin-right: 10px;
+  text-align: center;
+  width: 180rpx; 
+  height: 300rpx;
+}

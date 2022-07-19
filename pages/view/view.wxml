@@ -1,0 +1,11 @@
+<!--pages/view/view.wxml-->
+<text>pages/view/view.wxml</text>
+<view 
+  class="v1" 
+  hover-class="v1-hover"
+  hover-stay-time="400"
+  hover-start-time="50">
+  <view class="v2" 
+        hover-class="v2-hover"
+        hover-stop-propagation="{{false}}"></view>
+</view>
