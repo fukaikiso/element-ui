@@ -1,24 +1,39 @@
-// pages/b/b.js
+// pages/input/input.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    name: '',  // 绑定用户名
+    age: '',
+    money: '',
+    idcard: '',
+    pwd: '', // 绑定密码框
+    repwd: '', // 绑定确认密码
   },
 
-  tapCity(event){
-    let c = event.target.dataset.c
-    let ec = this.getOpenerEventChannel()
-    ec.emit('acceptData',c)
+  inputRepwd(event){
+    this.setData({
+      repwd: event.detail.value
+    })
+  },
+
+  // event：小程序封装的事件对象，里面封装事件相关的属性
+  inputPwd(event){
+    let val = event.detail.value
+    console.log(val)
+    // 更新Data
+    this.setData({
+      pwd: val   // 把 val的值 存入 data.pwd变量
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options)
+
   },
 
   /**

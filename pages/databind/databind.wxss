@@ -1,0 +1,9 @@
+/* pages/databind/databind.wxss */
+.tag {
+  padding: 0px 15px; 
+  background-color: darksalmon;
+  color: white; margin-right: 5px;
+}
+.round {
+  border-radius: 50%;
+}

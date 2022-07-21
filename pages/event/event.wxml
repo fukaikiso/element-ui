@@ -1,0 +1,13 @@
+<!--pages/event/event.wxml-->
+<text>pages/event/event.wxml</text>
+<view class="v1" bindtap="tapv1">
+  <view class="v2" catchtap="tapv2"></view>
+</view>
+
+<view>购物车</view>
+<view class="item" wx:for="{{goods}}" wx:key="id">
+  <view>商品名称：{{item.name}}</view>
+  <view>商品单价：{{item.price}}</view>
+  <view>商品数量：{{item.num}}</view>
+  <button size="mini" type="warn" data-index="{{index}}" bindtap="tapDel">删除</button>
+</view>

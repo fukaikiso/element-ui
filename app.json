@@ -1,7 +1,13 @@
 {
   "pages": [
-    "pages/scrollview/scrollview",
     "pages/a/a",
+    "pages/todo/todo",
+    "pages/event/event",
+    "pages/radio/radio",
+    "pages/databind/databind",
+    "pages/input/input",
+    "pages/button/button",
+    "pages/scrollview/scrollview",
     "pages/b/b",
     "pages/c/c",
     "pages/swiper/swiper",

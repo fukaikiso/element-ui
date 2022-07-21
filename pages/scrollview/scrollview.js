@@ -8,6 +8,14 @@ Page({
 
   },
 
+  toUpper(){
+    console.log('到顶了...')
+  },
+  
+  toLower(){
+    console.log('到底了...')
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -7,3 +7,7 @@
   url="/pages/c/c">
   我是B，点我redirect到C
 </navigator>
+
+<button bindtap="tapCity" data-c="北京">北京</button>
+<button bindtap="tapCity" data-c="上海">上海</button>
+<button bindtap="tapCity" data-c="深圳">深圳</button>

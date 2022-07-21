@@ -1,0 +1,5 @@
+/* pages/button/button.wxss */
+button {
+  margin: 10px;
+  width: 700rpx !important;
+}

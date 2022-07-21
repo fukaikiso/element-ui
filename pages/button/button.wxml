@@ -1,0 +1,32 @@
+<!--pages/button/button.wxml-->
+<text>pages/button/button.wxml</text>
+
+<button type="primary" open-type="contact">
+  Contact
+</button>
+<button type="primary" open-type="feedback">
+  feedback
+</button>
+<button type="primary" open-type="openSetting">
+  openSetting
+</button>
+<button type="primary" open-type="share">
+  share
+</button>
+
+
+
+
+
+
+
+
+
+
+
+
+<button>我是一个按钮</button>
+<button type="primary">我是一个按钮</button>
+<button type="warn" plain>我是一个按钮</button>
+<button type="primary"
+  loading>我是一个按钮</button>

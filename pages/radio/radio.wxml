@@ -1,0 +1,35 @@
+<!--pages/radio/radio.wxml-->
+<view>0.请选择国籍</view>
+<picker mode="selector" range="{{cs}}" bindchange="changeCountry">点击选择国籍：{{cs[country]}}</picker>
+
+<view>1.请选择你最擅长的英雄？</view>
+<radio-group bindchange="changeRadio">
+  <radio color="#f00" value="A">A.花木兰</radio>
+  <radio color="#ff0" value="B">B.貂蝉</radio>
+  <radio color="#0f0" value="C">C.公孙离</radio>
+  <radio color="#00f" value="D">D.庄周</radio>
+</radio-group>
+<view>您选择的答案是：{{answer}}</view>
+
+<view>2.请选择你擅长的位置？</view>
+<checkbox-group bindchange="changeCheckbox">
+  <checkbox color="#f00" value="A">A.上路</checkbox>
+  <checkbox color="#f00" value="B">B.中路</checkbox>
+  <checkbox color="#f00" value="C">C.下路</checkbox>
+  <checkbox color="#f00" value="D">D.打野</checkbox>
+  <checkbox color="#f00" value="E">E.辅助</checkbox>
+</checkbox-group>
+<view>您选择的答案是：{{answer2}}</view>
+
+<view>3.是否开启加速器？</view>
+<switch bindchange="changeSwitch">{{accesslator}}</switch>
+
+<view>4.请选择你的战区？</view>
+<picker mode="region" bindchange="changeRegion">
+  点击选择城市：{{city}}
+</picker>
+
+<view>5.请选择入坑时间？</view>
+<picker mode="date" bindchange="changeDate">
+  点击选择时间：{{date}}
+</picker>

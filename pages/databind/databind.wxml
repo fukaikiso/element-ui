@@ -1,0 +1,47 @@
+<!--pages/databind/databind.wxml-->
+<image 
+  bindtap="tapImage"
+  src="/images/{{num}}.jpg"
+  style="width: 750rpx; height: 421rpx;"></image>
+
+<image 
+  class="{{className}}"
+  mode="aspectFill"
+  style="width:{{size}}rpx; height: {{size}}rpx;"
+  src="https://p1.meituan.net/moviemachine/de254185defaaf9ead46c7caee9b7f32143838.jpg"></image>
+
+<view>个人简历</view>
+<view>姓名：{{name}}</view>
+<view>
+  年龄：{{age}}
+  <text wx:if="{{age<18}}">未成年</text>  
+  <text wx:elif="{{age<=35}}">青年</text>  
+  <text wx:elif="{{age<=60}}">中年</text>  
+  <text wx:else>老年</text>  
+
+</view>
+<view>婚否：{{married?'已婚':'未婚'}}</view>
+<view>
+  好友：
+  <!-- <text class="{{item.married?'red':'blue'}}" -->
+  <text class="tag"
+    wx:for="{{friends}}"
+    wx:key="index">{{item.name}}</text>
+</view>
+<view>学校： {{school.name}} 地址：{{school.loc}}</view>
+<view>
+  爱好：
+  <text class="tag"
+    wx:for="{{hobby}}" 
+    wx:key="*this">{{item}}</text>
+</view>
+
+
+<view>他喜欢吃：</view>
+<view wx:for="{{foods}}" wx:key="id"
+  wx:for-item="f"  wx:for-index="i">
+  索引：{{i}}
+  ID：{{f.id}}
+  食品名称：{{f.name}}
+  食品价格：{{f.price}}
+</view>

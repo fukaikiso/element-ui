@@ -1,4 +1,4 @@
-// pages/b/b.js
+// pages/button/button.js
 Page({
 
   /**
@@ -8,17 +8,11 @@ Page({
 
   },
 
-  tapCity(event){
-    let c = event.target.dataset.c
-    let ec = this.getOpenerEventChannel()
-    ec.emit('acceptData',c)
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options)
+
   },
 
   /**

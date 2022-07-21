@@ -5,7 +5,9 @@
   enable-flex="{{true}}"
   scroll-x="{{true}}"
   show-scrollbar="{{false}}"
-  enhanced="{{true}}">
+  enhanced="{{true}}"
+  bindscrolltoupper="toUpper"
+  bindscrolltolower="toLower">
   <view class="item" wx:for="{{50}}">
     <image 
       style="width: 180rpx;"

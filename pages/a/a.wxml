@@ -1,3 +1,7 @@
 <!--pages/a/a.wxml-->
 <text>pages/a/a.wxml</text> 
 <navigator url="/pages/b/b">我是A，点我跳转到B</navigator>
+
+<button bindtap="tapBtn">点我跳转到b</button>
+
+<view>您选择的城市是:{{city}}</view>

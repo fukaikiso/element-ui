@@ -5,14 +5,28 @@ Page({
    * 页面的初始数据
    */
   data: {
+    city:'未选择',
+  },
 
+  tapBtn(){
+    wx.navigateTo({
+      url: '/pages/b/b?moveid=10086&name=xixixi',
+      events:{
+        acceptData:(data)=>{
+          console.log('接收到b的数据'+data)
+          this.setData({
+            city:data
+          })
+        }
+      },
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    
   },
 
   /**

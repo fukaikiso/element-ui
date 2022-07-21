@@ -1,0 +1,24 @@
+<!--pages/input/input.wxml-->
+<text>用户名：{{name}}</text>
+<input model:value="{{name}}" type="text" placeholder="text"/>
+<text>年龄：{{age}}</text>
+<input model:value="{{age}}" type="number" placeholder="number"/>
+<text>银行卡余额：{{money}}</text>
+<input model:value="{{money}}" type="digit" placeholder="digit"/>
+<text>身份证号：{{idcard}}</text>
+<input model:value="{{idcard}}" type="idcard" placeholder="idcard"/>
+
+<text>您输入的密码是：{{pwd}}</text>
+<input bindinput="inputPwd"
+  type="text" password placeholder="password"/>
+
+<text>您输入的确认密码是：{{repwd}}</text>
+<input type="text" bindinput="inputRepwd" password placeholder="确认密码"/>
+
+<!-- 
+
+<input confirm-type="send" type="text" placeholder="send"/>
+<input confirm-type="go" type="text" placeholder="go"/>
+<input confirm-type="done" type="text" placeholder="done"/>
+<input confirm-type="search" type="text" placeholder="search"/>
+<input confirm-type="next" type="text" placeholder="next"/> -->
